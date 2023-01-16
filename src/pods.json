@@ -1,0 +1,16 @@
+{
+  "appbar": {
+    "name": "fint-kontroll-appbar-pod",
+    "uri": "http://fint-kontroll-appbar-pod:7100/manifest.json"
+  },
+  "menu": {
+    "name": "fint-kontroll-menu-pod",
+    "uri": "http://fint-kontroll-appbar-pod:7100/manifest.json"
+  },
+  "main": [
+    {
+      "name": "fint-kontroll-groups-pod",
+      "uri": "http://fint-kontroll-groups-pod:7100/manifest.json"
+    }
+  ]
+}
