@@ -1,0 +1,11 @@
+{
+  "name": "example",
+  "version": "1.0.0",
+  "main": "build/example/layout-example.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "tsc && node build/example/layout-example.js"
+  },
+  "dependencies": {
+  }
+}

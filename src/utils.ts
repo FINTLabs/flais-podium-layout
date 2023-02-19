@@ -1,10 +1,9 @@
-import { PodiumClientResponse } from "@podium/client";
+import {PodiumClientResource, PodiumClientResponse } from "@podium/client";
 import Layout from "@podium/layout";
 import { Express } from "express";
-import {Pods} from "./types";
-import type from "@podium/utils";
+import {AppBarMenuMainLayout, Pod} from "./types";
 import {LAYOUT_DEBUG, LAYOUT_PATH_NAME} from "./environment";
-
+import { buildLinkElement, buildScriptElement } from "./html-utils";
 export const bodyTemplate = (
   appbar: PodiumClientResponse | string,
   menu: PodiumClientResponse | string,
@@ -25,40 +24,41 @@ export const bodyTemplate = (
     `;
 };
 
-export const getPods = (podsFile: string): Pods => {
+export const getPods = (podsFile: string): AppBarMenuMainLayout => {
   return require(podsFile);
 };
 
-const registerAppBarPod = (pods: Pods, layout: Layout) =>
+export const registerAppBarPod = (pods: AppBarMenuMainLayout, layout: Layout) : PodiumClientResource =>
   layout.client.register({
     name: pods.appbar.name,
     uri: pods.appbar.uri,
   });
 
-const registerMenuPod = (pods: Pods, layout: Layout) =>
+export const registerMenuPod = (pods: AppBarMenuMainLayout, layout: Layout) : PodiumClientResource =>
   layout.client.register({
     name: pods.menu.name,
     uri: pods.menu.uri,
   });
 
-export const registerPods = (pods: Pods, layout: Layout, app: Express) =>
-  pods.main.forEach((pod) => {
+export const registerPods = (pods: Pod[], appBar: PodiumClientResource, menu: PodiumClientResource,  layout: Layout, app: Express) =>
+  pods.forEach((pod) => {
     const podMain = layout.client.register({
       name: pod.name,
       uri: pod.uri,
     });
 
-    app.get(pod.uri, async (req, res, next) => {
+    app.get(pod.path, async (req, res, next) => {
       const incoming = res.locals.podium;
-      const [appbar, menu, main] = await Promise.all([
-        registerAppBarPod(pods, layout).fetch(incoming),
-        registerMenuPod(pods, layout).fetch(incoming),
+      const [appBarPod, menuPod, main] = await Promise.all([
+
+        appBar.fetch(incoming),
+        menu.fetch(incoming),
         podMain.fetch(incoming),
       ]);
 
-      incoming.podlets = [appbar, menu, main];
+      incoming.podlets = [appBarPod, menuPod, main];
 
-      res.podiumSend(bodyTemplate(appbar, menu, main));
+      res.podiumSend(bodyTemplate(appBarPod, menuPod, main));
     });
   });
 
@@ -86,12 +86,44 @@ export const createLayout = (layoutName: string) : Layout => {
             <meta charset="utf-8" />
             <meta name="viewport" content="width=device-width, initial-scale=1" />
             <link rel="stylesheet" href="static/layout.css">
-            ${incoming.css.map(type.buildLinkElement).join("\n")}
+            ${incoming.css.map(buildLinkElement).join("\n")}
             <title>${incoming.view.title}</title>
+            <style>
+            body {
+    margin: 0;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-areas:
+            'header header header header '
+            'menu main main main ';
+    grid-template-rows: auto 100vh;
+    grid-template-columns: 240px 1fr 1fr 1fr;
+}
+
+.grid-header {
+    z-index: 1250;
+    grid-area: header;
+}
+
+.grid-menu {
+    grid-area: menu;
+}
+
+.grid-main {
+    grid-area: main;
+    margin: 32px;
+}
+
+.main {
+    height: 100vh;
+}
+</style>
         </head>
         <body>
             ${content}
-            ${incoming.js.map(type.buildScriptElement).join("\n")}
+            ${incoming.js.map(buildScriptElement).join("\n")}
         </body>
     </html>`;
 };
