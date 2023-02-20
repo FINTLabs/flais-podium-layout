@@ -19,12 +19,17 @@ export const registerMenuPod = (pods: AppBarMenuMainLayout, layout: Layout): Pod
         uri: pods.menu.uri,
     });
 
+export const registerMainPod = (pod: Pod, layout: Layout) : PodiumClientResource =>
+    layout.client.register({
+        name: pod.name,
+        uri: pod.uri,
+    });
 export const registerPods = (pods: Pod[], appBar: PodiumClientResource, menu: PodiumClientResource, layout: Layout, app: Express) =>
     pods.forEach((pod) => {
-        const podMain = layout.client.register({
-            name: pod.name,
-            uri: pod.uri,
-        });
+        // const podMain = layout.client.register({
+        //     name: pod.name,
+        //     uri: pod.uri,
+        // });
 
         app.get(pod.path, async (req, res, next) => {
             const incoming = res.locals.podium;
@@ -32,7 +37,7 @@ export const registerPods = (pods: Pod[], appBar: PodiumClientResource, menu: Po
 
                 appBar.fetch(incoming),
                 menu.fetch(incoming),
-                podMain.fetch(incoming),
+                registerMainPod(pod, layout).fetch(incoming),
             ]);
 
             incoming.podlets = [appBarPod, menuPod, main];
