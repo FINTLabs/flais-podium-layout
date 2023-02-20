@@ -1,4 +1,4 @@
-import {PodiumClientResource, PodiumClientResponse} from "@podium/client";
+import {PodiumClientResponse} from "@podium/client";
 import {buildLinkElement, buildScriptElement} from "./html-utils";
 
 export const bodyTemplate = (

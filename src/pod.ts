@@ -31,7 +31,7 @@ export const registerPods = (pods: Pod[], appBar: PodiumClientResource, menu: Po
         //     uri: pod.uri,
         // });
 
-        app.get(pod.path, async (req, res, next) => {
+        app.get(pod.path, async (req, res) => {
             const incoming = res.locals.podium;
             const [appBarPod, menuPod, main] = await Promise.all([
 
