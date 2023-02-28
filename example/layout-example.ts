@@ -1,3 +1,3 @@
-import {startLayout} from "../src";
+import {startLayout, Options, DefaultOptions} from "../src";
 
-startLayout("example");
+startLayout(new DefaultOptions("example", "../../pods.json"));

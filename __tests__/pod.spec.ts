@@ -17,6 +17,7 @@ const appBarMenuMainLayout: AppBarMenuMainLayout = {
     }
 
 }
+
 describe("When register a AppBar pod", () => {
     const appBarPod = registerAppBarPod(appBarMenuMainLayout, new Layout({name: "foo", pathname: "bar"}));
 

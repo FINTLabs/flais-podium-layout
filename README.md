@@ -19,7 +19,9 @@ about `Layouts` and `podium-lib`.
 **Typescript**
 
 ```ts
+import {startLayout} from "../src";
 
+startLayout(new DefaultOptions("example", "../../pods.json"));
 ```
 
 In addition, you need to:
@@ -33,6 +35,6 @@ In addition, you need to:
 | PODS_FILE        | `./pods.json` | List of pods for the layout. It contains the AppBar, Menu and Main pods. See [AppBarMenuMainLayout](https://fintlabs.github.io/flais-podium-layout/interfaces/AppBarMenuMainLayout.html) for more information about the structure. |
 | IS_DEVELOPMENT   | `false`       | This is set with the following expression `process.env.NODE_ENV === 'development'`                                                                                                                                                 |
 | LAYOUT_PATH_NAME | `/`           |                                                                                                                                                                                                                                    |
-| LAYOUT_PORT      | `7000`        |                                                                                                                                                                                                                                    |  
+| LAYOUT_PORT      | `3000`        |                                                                                                                                                                                                                                    |  
 | LOGGING_LEVEL    | `info`        |                                                                                                                                                                                                                                    |  
 | LAYOUT_DEBUG     | `false`       |                                                                                                                                                                                                                                    |  
