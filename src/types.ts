@@ -46,12 +46,12 @@ export class DefaultOptions implements Options {
     /**
      * @default false
      */
-    isDevelopment: boolean = false;
+    isDevelopment = false;
 
     /**
      * @default false
      */
-    layoutDebug: boolean = false;
+    layoutDebug = false;
     /**
      *
      */
@@ -59,21 +59,21 @@ export class DefaultOptions implements Options {
     /**
      * @default /
      */
-    layoutPathName: string = '/';
+    layoutPathName = '/';
 
     /**
      * @default 7000
      */
-    layoutPort: number = 3000;
+    layoutPort = 3000;
     /**
      * @default info
      */
-    loggingLevel: string = 'info';
+    loggingLevel = 'info';
 
     /**
      * @default ./pods.json
      */
-    podsFile: string = './pods.json';
+    podsFile = './pods.json';
 }
 
 
