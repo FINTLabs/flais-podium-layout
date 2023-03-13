@@ -1,4 +1,4 @@
-import {AppBarMenuMainLayout, Pod} from "./types";
+import {AppBarMenuMainLayout, MainPodClientResource, Pod} from "./types";
 import Layout from "@podium/layout";
 import {PodiumClientResource} from "@podium/client";
 import {Express} from "express";
@@ -19,25 +19,29 @@ export const registerMenuPod = (pods: AppBarMenuMainLayout, layout: Layout): Pod
         uri: pods.menu.uri,
     });
 
-export const registerMainPod = (pod: Pod, layout: Layout) : PodiumClientResource =>
-    layout.client.register({
-        name: pod.name,
-        uri: pod.uri,
-    });
-export const registerPods = (pods: Pod[], appBar: PodiumClientResource, menu: PodiumClientResource, layout: Layout, app: Express) =>
-    pods.forEach((pod) => {
-        // const podMain = layout.client.register({
-        //     name: pod.name,
-        //     uri: pod.uri,
-        // });
+export const registerMainPod = (pods: Pod[], layout: Layout): MainPodClientResource[] =>
+    pods.map(pod => {
+        return {
+            pod: pod,
+            resource: layout.client.register({
+                name: pod.name,
+                uri: pod.uri,
+            })
+        }
 
-        app.get(pod.path, async (req, res) => {
+
+    });
+
+
+export const registerPods = (pods: MainPodClientResource[], appBar: PodiumClientResource, menu: PodiumClientResource, layout: Layout, app: Express) =>
+    pods.forEach((mainPod) => {
+        app.get(mainPod.pod.path, async (req, res) => {
             const incoming = res.locals.podium;
             const [appBarPod, menuPod, main] = await Promise.all([
 
                 appBar.fetch(incoming),
                 menu.fetch(incoming),
-                registerMainPod(pod, layout).fetch(incoming),
+                mainPod.resource.fetch(incoming)
             ]);
 
             incoming.podlets = [appBarPod, menuPod, main];

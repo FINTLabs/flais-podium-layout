@@ -1,4 +1,4 @@
-import {getPods, registerAppBarPod, registerMenuPod, registerPods} from "./pod";
+import {getPods, registerAppBarPod, registerMainPod, registerMenuPod, registerPods} from "./pod";
 import {setupExpress} from "./http";
 import {log} from "./logger";
 import Layout from "@podium/layout";
@@ -29,7 +29,7 @@ export const startLayout = (options: Options) => {
     const layout = createLayout(options)
     const app = setupExpress(layout);
 
-    registerPods(pods.main, registerAppBarPod(pods, layout), registerMenuPod(pods, layout), layout, app);
+    registerPods(registerMainPod(pods.main, layout), registerAppBarPod(pods, layout), registerMenuPod(pods, layout), layout, app);
 
     app.listen(options.layoutPort, () => {
         log.info("Layout server started!");

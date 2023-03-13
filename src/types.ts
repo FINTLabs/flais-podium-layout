@@ -1,3 +1,5 @@
+import {PodiumClientResource} from "@podium/client";
+
 export interface Options {
 
     /**
@@ -140,4 +142,9 @@ export interface Pod {
     title?: string;
 
     path: string;
+}
+
+export interface MainPodClientResource {
+    pod: Pod;
+    resource: PodiumClientResource
 }

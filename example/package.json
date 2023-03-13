@@ -7,5 +7,6 @@
     "start": "tsc && node build/example/layout-example.js"
   },
   "dependencies": {
+    "@fintlabs/flais-podium-layout": "../"
   }
 }
