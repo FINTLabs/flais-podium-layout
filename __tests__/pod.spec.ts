@@ -51,25 +51,34 @@ describe("When register a Menu pod", () => {
     });
 });
 
-describe("When register a Main pod", () => {
-    const pod: Pod = {
-        name: "mainPod",
+describe("When register main pods it", () => {
+    const pod1: Pod = {
+        name: "mainPod1",
         uri: "http://localhost:7103/manifest.json",
         path: "/"
-    }
-    const mainPod = registerMainPod(
-        pod,
+    };
+    const pod2: Pod = {
+        name: "mainPod2",
+        uri: "http://localhost:7103/manifest.json",
+        path: "/"
+    };
+
+    const mainPods = registerMainPod(
+        [pod1, pod2],
         new Layout({name: "foo", pathname: "bar"}));
 
-    it("it should be defined", () => {
-        expect(mainPod).toBeDefined()
+    it("should be 2 main pods in the list", () => {
+        expect(mainPods.length).toBe(2);
+    });
+    it("should be defined", () => {
+        expect(mainPods).toBeDefined()
     });
 
-    it("it should have the name from the Pod", () => {
-        expect(mainPod.name).toContain(pod.name)
+    it("should have the name from the Pod", () => {
+        expect(mainPods[0].pod.name).toContain(pod1.name)
     });
 
-    it("it should have the uri from the Pod", () => {
-        expect(mainPod.uri).toContain(pod.uri)
+    it("should have the uri from the Pod", () => {
+        expect(mainPods[0].pod.uri).toContain(pod1.uri)
     });
 });
