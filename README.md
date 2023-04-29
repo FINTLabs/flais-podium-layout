@@ -13,28 +13,24 @@ about `Layouts` and `podium-lib`.
 **Javascript**
 
 ```javascript
-
+TODO
 ```
 
 **Typescript**
 
 ```ts
-import {startLayout} from "../src";
+import {DefaultOptions, startLayout} from "@fintlabs/flais-podium-layout";
 
-startLayout(new DefaultOptions("example", "../../pods.json"));
+const podsFile = process.env.PODS_FILE || `${process.cwd()}/pods-local.json`;
+
+startLayout(new DefaultOptions("example",  podsFile));
 ```
 
 In addition, you need to:
 
 * Create a deployment for the layout server, e.g. Docker.
 
-# Properties
+# DefaultOptions
 
-| Property         | Default       | Description                                                                                                                                                                                                                        |
-|------------------|---------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| PODS_FILE        | `./pods.json` | List of pods for the layout. It contains the AppBar, Menu and Main pods. See [AppBarMenuMainLayout](https://fintlabs.github.io/flais-podium-layout/interfaces/AppBarMenuMainLayout.html) for more information about the structure. |
-| IS_DEVELOPMENT   | `false`       | This is set with the following expression `process.env.NODE_ENV === 'development'`                                                                                                                                                 |
-| LAYOUT_PATH_NAME | `/`           |                                                                                                                                                                                                                                    |
-| LAYOUT_PORT      | `3000`        |                                                                                                                                                                                                                                    |  
-| LOGGING_LEVEL    | `info`        |                                                                                                                                                                                                                                    |  
-| LAYOUT_DEBUG     | `false`       |                                                                                                                                                                                                                                    |  
+See [Options](https://fintlabs.github.io/flais-podium-layout/interfaces/Options.html) for for details
+and [DefaultOptions](https://fintlabs.github.io/flais-podium-layout/classes/DefaultOptions.html) for default values.
