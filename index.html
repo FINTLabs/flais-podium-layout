@@ -26,58 +26,21 @@ about <code>Layouts</code> and <code>podium-lib</code>.</p>
   <h1>Usage</h1>
 </a>
 <p><strong>Javascript</strong></p>
-<pre><code class="language-javascript">
+<pre><code class="language-javascript"><span class="hl-0">TODO</span>
 </code></pre>
 <p><strong>Typescript</strong></p>
-<pre><code class="language-ts"><span class="hl-0">import</span><span class="hl-1"> {</span><span class="hl-2">startLayout</span><span class="hl-1">} </span><span class="hl-0">from</span><span class="hl-1"> </span><span class="hl-3">&quot;../src&quot;</span><span class="hl-1">;</span><br/><br/><span class="hl-4">startLayout</span><span class="hl-1">(</span><span class="hl-5">new</span><span class="hl-1"> </span><span class="hl-4">DefaultOptions</span><span class="hl-1">(</span><span class="hl-3">&quot;example&quot;</span><span class="hl-1">, </span><span class="hl-3">&quot;../../pods.json&quot;</span><span class="hl-1">));</span>
+<pre><code class="language-ts"><span class="hl-1">import</span><span class="hl-2"> {</span><span class="hl-3">DefaultOptions</span><span class="hl-2">, </span><span class="hl-3">startLayout</span><span class="hl-2">} </span><span class="hl-1">from</span><span class="hl-2"> </span><span class="hl-4">&quot;@fintlabs/flais-podium-layout&quot;</span><span class="hl-2">;</span><br/><br/><span class="hl-5">const</span><span class="hl-2"> </span><span class="hl-0">podsFile</span><span class="hl-2"> = </span><span class="hl-3">process</span><span class="hl-2">.</span><span class="hl-3">env</span><span class="hl-2">.</span><span class="hl-0">PODS_FILE</span><span class="hl-2"> || </span><span class="hl-4">`</span><span class="hl-5">${</span><span class="hl-3">process</span><span class="hl-6">.</span><span class="hl-7">cwd</span><span class="hl-6">()</span><span class="hl-5">}</span><span class="hl-4">/pods-local.json`</span><span class="hl-2">;</span><br/><br/><span class="hl-7">startLayout</span><span class="hl-2">(</span><span class="hl-5">new</span><span class="hl-2"> </span><span class="hl-7">DefaultOptions</span><span class="hl-2">(</span><span class="hl-4">&quot;example&quot;</span><span class="hl-2">,  </span><span class="hl-3">podsFile</span><span class="hl-2">));</span>
 </code></pre>
 <p>In addition, you need to:</p>
 <ul>
 <li>Create a deployment for the layout server, e.g. Docker.</li>
 </ul>
 
-<a href="#properties" id="properties" style="color: inherit; text-decoration: none;">
-  <h1>Properties</h1>
+<a href="#defaultoptions" id="defaultoptions" style="color: inherit; text-decoration: none;">
+  <h1>DefaultOptions</h1>
 </a>
-<table>
-<thead>
-<tr>
-<th>Property</th>
-<th>Default</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>PODS_FILE</td>
-<td><code>./pods.json</code></td>
-<td>List of pods for the layout. It contains the AppBar, Menu and Main pods. See <a href="https://fintlabs.github.io/flais-podium-layout/interfaces/AppBarMenuMainLayout.html">AppBarMenuMainLayout</a> for more information about the structure.</td>
-</tr>
-<tr>
-<td>IS_DEVELOPMENT</td>
-<td><code>false</code></td>
-<td>This is set with the following expression <code>process.env.NODE_ENV === &#39;development&#39;</code></td>
-</tr>
-<tr>
-<td>LAYOUT_PATH_NAME</td>
-<td><code>/</code></td>
-<td></td>
-</tr>
-<tr>
-<td>LAYOUT_PORT</td>
-<td><code>3000</code></td>
-<td></td>
-</tr>
-<tr>
-<td>LOGGING_LEVEL</td>
-<td><code>info</code></td>
-<td></td>
-</tr>
-<tr>
-<td>LAYOUT_DEBUG</td>
-<td><code>false</code></td>
-<td></td>
-</tr>
-</tbody></table>
+<p>See <a href="https://fintlabs.github.io/flais-podium-layout/interfaces/Options.html">Options</a> for for details
+and <a href="https://fintlabs.github.io/flais-podium-layout/classes/DefaultOptions.html">DefaultOptions</a> for default values.</p>
 </div></div>
 <div class="col-4 col-menu menu-sticky-wrap menu-highlight">
 <div class="tsd-navigation settings">
