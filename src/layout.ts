@@ -31,6 +31,7 @@ export const startLayout = (options: Options) => {
 
     registerPods(registerMainPod(pods.main, layout), registerAppBarPod(pods, layout), registerMenuPod(pods, layout), layout, app);
 
+    app.set('base', options.layoutPathName);
     app.listen(options.layoutPort, () => {
         log.info("Layout server started!");
         log.info(`http://localhost:${options.layoutPort}`);

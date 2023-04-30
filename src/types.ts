@@ -29,7 +29,7 @@ export interface Options {
     /**
      * Podium layout debugging.
      */
-    layoutDebug?: boolean
+    layoutDebug?: boolean;
 
 }
 
