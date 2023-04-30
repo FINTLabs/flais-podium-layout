@@ -1,3 +1,3 @@
 import {DefaultOptions, startLayout} from "@fintlabs/flais-podium-layout";
 
-startLayout(new DefaultOptions("example", "../../pods.json"));
+startLayout(new DefaultOptions("example", `${process.cwd()}/pods.json`, "/foo") );

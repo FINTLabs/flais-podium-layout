@@ -26,6 +26,7 @@ export const registerMainPod = (pods: Pod[], layout: Layout): MainPodClientResou
             resource: layout.client.register({
                 name: pod.name,
                 uri: pod.uri,
+                throwable: true
             })
         }
 
@@ -36,16 +37,21 @@ export const registerMainPod = (pods: Pod[], layout: Layout): MainPodClientResou
 export const registerPods = (pods: MainPodClientResource[], appBar: PodiumClientResource, menu: PodiumClientResource, layout: Layout, app: Express) =>
     pods.forEach((mainPod) => {
         app.get(mainPod.pod.path, async (req, res) => {
-            const incoming = res.locals.podium;
-            const [appBarPod, menuPod, main] = await Promise.all([
+            try {
 
-                appBar.fetch(incoming),
-                menu.fetch(incoming),
-                mainPod.resource.fetch(incoming)
-            ]);
+                const incoming = res.locals.podium;
+                const [appBarPod, menuPod, main] = await Promise.all([
 
-            incoming.podlets = [appBarPod, menuPod, main];
+                    appBar.fetch(incoming),
+                    menu.fetch(incoming),
+                    mainPod.resource.fetch(incoming)
+                ]);
 
-            res.podiumSend(bodyTemplate(appBarPod, menuPod, main));
+                incoming.podlets = [appBarPod, menuPod, main];
+
+                res.podiumSend(bodyTemplate(appBarPod, menuPod, main));
+            } catch (err) {
+                res.status(500).send(`${mainPod.pod.name} er for tiden ikke tilgjengelig. Prøv igjen senere.`);
+            }
         });
     });

@@ -11,7 +11,7 @@
     {
       "name": "fint-kontroll-groups-pod",
       "uri": "http://localhost:7103/manifest.json",
-      "path": "/grupper"
+      "path": "/foo"
     }
   ]
 }

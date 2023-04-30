@@ -4,7 +4,8 @@
   "main": "build/example/layout-example.js",
   "license": "MIT",
   "scripts": {
-    "start": "tsc && node build/example/layout-example.js"
+    "start": "tsc && node build/layout-example.js",
+    "clean": "rm -Rf build && rm -Rf node_modules && yarn install"
   },
   "dependencies": {
     "@fintlabs/flais-podium-layout": "../"
