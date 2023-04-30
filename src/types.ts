@@ -36,13 +36,18 @@ export interface Options {
 export class DefaultOptions implements Options {
 
     /**
-     * @param layoutName
-     * @param podsFile
+     * @param layoutName Name that the layout identifies itself by
+     * @param podsFile 	JSON file that defines the pods. See {@link AppBarMenuMainLayout}
+     * @param basePath 	Pathname of where a layout is mounted in an HTTP server
      */
-    constructor(layoutName: string, podsFile?: string) {
+    constructor(layoutName: string, podsFile?: string, basePath?: string) {
         this.layoutName = layoutName;
         if (podsFile) {
             this.podsFile = podsFile;
+        }
+
+        if (basePath) {
+            this.layoutPathName = basePath;
         }
     }
 
