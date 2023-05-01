@@ -8,6 +8,7 @@ import axios from "axios";
 export const getPods = (podsFile: string): Promise<LayoutConfiguration> => {
     try {
         const url = new URL(podsFile);
+
         return axios.get<LayoutConfiguration>(url.toString())
             .then(response => response.data);
     } catch (err) {

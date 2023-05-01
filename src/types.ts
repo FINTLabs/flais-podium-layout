@@ -8,10 +8,6 @@ export interface Options {
      */
     layoutName: string;
     /**
-     * Exact location of the pods file.
-     */
-    podsFile: string;
-    /**
      * Port for the layout service.
      */
     layoutPort: number;
@@ -38,15 +34,10 @@ export class DefaultOptions implements Options {
 
     /**
      * @param layoutName Name that the layout identifies itself by
-     * @param podsFile 	JSON file that defines the pods. See {@link AppBarMenuMainLayout}
-     * @param basePath 	Pathname of where a layout is mounted in an HTTP server
+     * @param basePath    Pathname of where a layout is mounted in an HTTP server
      */
-    constructor(layoutName: string, podsFile?: string, basePath?: string) {
+    constructor(layoutName: string, basePath?: string) {
         this.layoutName = layoutName;
-        if (podsFile) {
-            this.podsFile = podsFile;
-        }
-
         if (basePath) {
             this.layoutPathName = basePath;
         }
@@ -82,7 +73,7 @@ export class DefaultOptions implements Options {
     /**
      * @default ./pods.json
      */
-    podsFile = './pods.json';
+    //podsFile = './pods.json';
 }
 
 /**
