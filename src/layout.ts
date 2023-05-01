@@ -24,6 +24,7 @@ const createLayout = (config: Options): Layout => {
 }
 
 export const startLayout = (layoutConfigUri: string, options?: Options) => {
+    log.info("Getting layout configuration from: ", layoutConfigUri);
     getPods(layoutConfigUri)
         .then(layoutConfiguration => {
             const optionsOrDefault = options === undefined
