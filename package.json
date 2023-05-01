@@ -38,6 +38,7 @@
     "@podium/layout": "^4.6.117",
     "@podium/podlet": "^4.4.69",
     "@podium/utils": "^4.4.39",
+    "axios": "^1.4.0",
     "express": "^4.18.2",
     "express-prometheus-middleware": "^1.2.0",
     "log4js": "^6.7.1",

@@ -6,7 +6,7 @@ import {createDocument} from "./html";
 import {Options} from "./types";
 
 
-const createLayout = (config: Options) : Layout => {
+const createLayout = (config: Options): Layout => {
     const layout = new Layout({
         name: config.layoutName,
         pathname: config.layoutPathName,
@@ -24,18 +24,23 @@ const createLayout = (config: Options) : Layout => {
 }
 
 export const startLayout = (options: Options) => {
-    const pods = getPods(options.podsFile);
-    log.info("Pods:", pods);
-    log.info("Options:", options);
-    const layout = createLayout(options);
-    const app = setupExpress(layout);
+    getPods(options.podsFile)
+        .then(layoutConfiguration => {
+            options.layoutPathName = layoutConfiguration.basePath;
+            options.layoutName = layoutConfiguration.name;
+            const pods = layoutConfiguration.appBarMenuMainLayout;
+            log.info("Layout configuration:", layoutConfiguration);
+            log.info("Options:", options);
+            const layout = createLayout(options);
+            const app = setupExpress(layout);
 
-    registerPods(registerMainPod(pods.main, layout), registerAppBarPod(pods, layout), registerMenuPod(pods, layout), layout, app);
+            registerPods(registerMainPod(pods.main, layout), registerAppBarPod(pods, layout), registerMenuPod(pods, layout), layout, app);
 
-    app.listen(options.layoutPort, () => {
-        log.info("Layout server started!");
-        log.info(`http://localhost:${options.layoutPort}${options.layoutPathName}`);
-    });
+            app.listen(options.layoutPort, () => {
+                log.info("Layout server started!");
+                log.info(`http://localhost:${options.layoutPort}${options.layoutPathName}`);
+            });
+        })
 };
 
 

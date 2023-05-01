@@ -1,11 +1,19 @@
-import {AppBarMenuMainLayout, MainPodClientResource, Pod} from "./types";
+import {AppBarMenuMainLayout, LayoutConfiguration, MainPodClientResource, Pod} from "./types";
 import Layout from "@podium/layout";
 import {PodiumClientResource} from "@podium/client";
 import {Express} from "express";
 import {bodyTemplate} from "./html";
+import axios from "axios";
 
-export const getPods = (podsFile: string): AppBarMenuMainLayout => {
-    return require(podsFile);
+export const getPods = (podsFile: string): Promise<LayoutConfiguration> => {
+    try {
+        const url = new URL(podsFile);
+        return axios.get<LayoutConfiguration>(url.toString())
+            .then(response => response.data);
+    } catch (err) {
+        return Promise.resolve<LayoutConfiguration>(require(podsFile));
+
+    }
 };
 export const registerAppBarPod = (pods: AppBarMenuMainLayout, layout: Layout): PodiumClientResource =>
     layout.client.register({

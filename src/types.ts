@@ -1,5 +1,6 @@
 import {PodiumClientResource} from "@podium/client";
 
+
 export interface Options {
 
     /**
@@ -84,6 +85,14 @@ export class DefaultOptions implements Options {
     podsFile = './pods.json';
 }
 
+/**
+ *
+ */
+export interface LayoutConfiguration {
+    name: string;
+    basePath: string;
+    appBarMenuMainLayout: AppBarMenuMainLayout
+}
 
 /**
  * Represents a AppBar, Menu, Main/features layout.
