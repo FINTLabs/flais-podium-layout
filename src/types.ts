@@ -1,15 +1,12 @@
 import {PodiumClientResource} from "@podium/client";
 
+
 export interface Options {
 
     /**
      * Name of the layout
      */
     layoutName: string;
-    /**
-     * Exact location of the pods file.
-     */
-    podsFile: string;
     /**
      * Port for the layout service.
      */
@@ -37,15 +34,10 @@ export class DefaultOptions implements Options {
 
     /**
      * @param layoutName Name that the layout identifies itself by
-     * @param podsFile 	JSON file that defines the pods. See {@link AppBarMenuMainLayout}
-     * @param basePath 	Pathname of where a layout is mounted in an HTTP server
+     * @param basePath    Pathname of where a layout is mounted in an HTTP server
      */
-    constructor(layoutName: string, podsFile?: string, basePath?: string) {
+    constructor(layoutName: string, basePath?: string) {
         this.layoutName = layoutName;
-        if (podsFile) {
-            this.podsFile = podsFile;
-        }
-
         if (basePath) {
             this.layoutPathName = basePath;
         }
@@ -81,9 +73,17 @@ export class DefaultOptions implements Options {
     /**
      * @default ./pods.json
      */
-    podsFile = './pods.json';
+    //podsFile = './pods.json';
 }
 
+/**
+ *
+ */
+export interface LayoutConfiguration {
+    name: string;
+    basePath: string;
+    appBarMenuMainLayout: AppBarMenuMainLayout
+}
 
 /**
  * Represents a AppBar, Menu, Main/features layout.

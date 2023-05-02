@@ -26,8 +26,19 @@ export const createDocument = (incoming: any, content: string) => {
     <html lang="en">
         <head>
             <meta charset="utf-8" />
+            <link rel="icon" href="https://stflaiscdn.blob.core.windows.net/media/favicon.ico" />
             <meta name="viewport" content="width=device-width, initial-scale=1" />
             ${incoming.css.map(buildLinkElement).join("\n")}
+            <link
+                rel="stylesheet"
+                href="https://fonts.googleapis.com/icon?family=Material+Icons"
+            />
+            <link 
+                rel="stylesheet" 
+                href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" 
+            />
+
+
             <title>${incoming.view.title}</title>
             <style>
                 body {

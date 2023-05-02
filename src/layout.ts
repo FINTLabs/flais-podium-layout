@@ -3,10 +3,10 @@ import {setupExpress} from "./http";
 import {log} from "./logger";
 import Layout from "@podium/layout";
 import {createDocument} from "./html";
-import {Options} from "./types";
+import {DefaultOptions, LayoutConfiguration, Options} from "./types";
 
 
-const createLayout = (config: Options) : Layout => {
+const createLayout = (config: Options): Layout => {
     const layout = new Layout({
         name: config.layoutName,
         pathname: config.layoutPathName,
@@ -23,19 +23,34 @@ const createLayout = (config: Options) : Layout => {
     return layout;
 }
 
-export const startLayout = (options: Options) => {
-    const pods = getPods(options.podsFile);
-    log.info("Pods:", pods);
-    log.info("Options:", options);
-    const layout = createLayout(options);
-    const app = setupExpress(layout);
+export const startLayout = (layoutConfigUri: string, options?: Options) => {
+    log.info("Getting layout configuration from: ", layoutConfigUri);
+    getPods(layoutConfigUri)
+        .then(layoutConfiguration => {
+            const optionsOrDefault = options === undefined
+                ? new DefaultOptions(layoutConfiguration.name, layoutConfiguration.basePath)
+                : applyLayoutConfigurationToOption(options, layoutConfiguration);
 
-    registerPods(registerMainPod(pods.main, layout), registerAppBarPod(pods, layout), registerMenuPod(pods, layout), layout, app);
+            const pods = layoutConfiguration.appBarMenuMainLayout;
+            log.info("Layout configuration:", JSON.stringify(layoutConfiguration));
+            log.info("Options:", JSON.stringify(optionsOrDefault));
+            const layout = createLayout(optionsOrDefault);
+            const app = setupExpress(layout);
 
-    app.listen(options.layoutPort, () => {
-        log.info("Layout server started!");
-        log.info(`http://localhost:${options.layoutPort}${options.layoutPathName}`);
-    });
+            registerPods(registerMainPod(pods.main, layout), registerAppBarPod(pods, layout), registerMenuPod(pods, layout), layout, app);
+
+            app.listen(optionsOrDefault.layoutPort, () => {
+                log.info("Layout server started!");
+                log.info(`http://localhost:${optionsOrDefault.layoutPort}${optionsOrDefault.layoutPathName}`);
+            });
+        })
 };
+
+const applyLayoutConfigurationToOption = (options: Options, layoutConfiguration: LayoutConfiguration): Options => {
+    options.layoutName = layoutConfiguration.name;
+    options.layoutPathName = layoutConfiguration.basePath;
+
+    return options;
+}
 
 
