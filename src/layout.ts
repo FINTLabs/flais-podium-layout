@@ -20,7 +20,7 @@ const createLayout = (config: Options): Layout => {
 
     layout.view((incoming, content) => {
         // Set the view.title property here
-        incoming.view.title = "Jennifer was here";
+        incoming.view.title = "Title Goes Here";
 
         return createDocument(incoming, content);
     });
