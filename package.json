@@ -1,6 +1,6 @@
 {
   "name": "@fintlabs/flais-podium-layout",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "This is a small helper library to help create a layout for your react project to run in the FINTLabs/FLAIS environment.",
   "private": false,
   "source": "src/index.ts",
