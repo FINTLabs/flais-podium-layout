@@ -18,7 +18,12 @@ const createLayout = (config: Options): Layout => {
         },
     });
 
-    layout.view((incoming, content) => createDocument(incoming, content));
+    layout.view((incoming, content) => {
+        // Set the view.title property here
+        incoming.view.title = "Jennifer was here";
+
+        return createDocument(incoming, content);
+    });
 
     return layout;
 }
