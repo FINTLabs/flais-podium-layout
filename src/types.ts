@@ -40,11 +40,15 @@ export class DefaultOptions implements Options {
     /**
      * @param layoutName Name that the layout identifies itself by
      * @param basePath    Pathname of where a layout is mounted in an HTTP server
+     * @param title HTML Title of page
      */
-    constructor(layoutName: string, basePath?: string) {
+    constructor(layoutName: string, basePath?: string, title?: string) {
         this.layoutName = layoutName;
         if (basePath) {
             this.layoutPathName = basePath;
+        }
+        if (title) {
+            this.layoutTitle = title;
         }
     }
 
@@ -92,6 +96,7 @@ export class DefaultOptions implements Options {
 export interface LayoutConfiguration {
     name: string;
     basePath: string;
+    title: string;
     appBarMenuMainLayout: AppBarMenuMainLayout
 }
 

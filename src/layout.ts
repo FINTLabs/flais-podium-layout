@@ -31,7 +31,7 @@ export const startLayout = (layoutConfigUri: string, options?: Options) => {
     getPods(layoutConfigUri)
         .then(layoutConfiguration => {
             const optionsOrDefault = options === undefined
-                ? new DefaultOptions(layoutConfiguration.name, layoutConfiguration.basePath)
+                ? new DefaultOptions(layoutConfiguration.name, layoutConfiguration.basePath, layoutConfiguration.title)
                 : applyLayoutConfigurationToOption(options, layoutConfiguration);
 
             const pods = layoutConfiguration.appBarMenuMainLayout;
@@ -52,6 +52,7 @@ export const startLayout = (layoutConfigUri: string, options?: Options) => {
 const applyLayoutConfigurationToOption = (options: Options, layoutConfiguration: LayoutConfiguration): Options => {
     options.layoutName = layoutConfiguration.name;
     options.layoutPathName = layoutConfiguration.basePath;
+    options.layoutTitle = layoutConfiguration.title;
 
     return options;
 }
