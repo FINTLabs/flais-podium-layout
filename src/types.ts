@@ -82,7 +82,7 @@ export class DefaultOptions implements Options {
     /**
      * Name of the layout
      */
-    layoutTitle = '';
+    layoutTitle = 'FINT';
 
     /**
      * @default ./pods.json
