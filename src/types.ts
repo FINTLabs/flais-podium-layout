@@ -28,6 +28,11 @@ export interface Options {
      */
     layoutDebug?: boolean;
 
+    /**
+     * Title of page
+     */
+    layoutTitle?: string;
+
 }
 
 export class DefaultOptions implements Options {
@@ -69,6 +74,11 @@ export class DefaultOptions implements Options {
      * @default info
      */
     loggingLevel = 'info';
+
+    /**
+     * Name of the layout
+     */
+    layoutTitle = '';
 
     /**
      * @default ./pods.json
