@@ -18,10 +18,7 @@ const createLayout = (config: Options): Layout => {
         },
     });
 
-    layout.view((incoming, content) => {
-        incoming.view.title = config.layoutTitle;
-        return createDocument(incoming, content);
-    });
+    layout.view((incoming, content) => createDocument(incoming, content));
 
     return layout;
 }
@@ -31,7 +28,7 @@ export const startLayout = (layoutConfigUri: string, options?: Options) => {
     getPods(layoutConfigUri)
         .then(layoutConfiguration => {
             const optionsOrDefault = options === undefined
-                ? new DefaultOptions(layoutConfiguration.name, layoutConfiguration.basePath, layoutConfiguration.title)
+                ? new DefaultOptions(layoutConfiguration.name, layoutConfiguration.basePath)
                 : applyLayoutConfigurationToOption(options, layoutConfiguration);
 
             const pods = layoutConfiguration.appBarMenuMainLayout;
@@ -52,9 +49,7 @@ export const startLayout = (layoutConfigUri: string, options?: Options) => {
 const applyLayoutConfigurationToOption = (options: Options, layoutConfiguration: LayoutConfiguration): Options => {
     options.layoutName = layoutConfiguration.name;
     options.layoutPathName = layoutConfiguration.basePath;
-    options.layoutTitle = layoutConfiguration.title;
 
     return options;
 }
-
 

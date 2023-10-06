@@ -72,6 +72,8 @@ export const registerPods = (
                     mainPod.resource.fetch(incoming),
                 ]);
 
+                incoming.view.title = mainPod.pod.title;
+
                 incoming.podlets = [appBarPod, menuPod, main];
 
                 res.podiumSend(bodyTemplate(appBarPod, menuPod, main));
