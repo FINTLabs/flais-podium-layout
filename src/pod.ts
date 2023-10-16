@@ -63,7 +63,7 @@ export const registerPods = (
     app: Express,
 ) =>
     pods.forEach((mainPod) => {
-        app.get(`${mainPod.pod.path}/*`, async (req, res) => {
+        app.get(mainPod.pod.path, async (req, res) => {
             try {
                 const incoming = res.locals.podium;
                 const [appBarPod, menuPod, main] = await Promise.all([
