@@ -74,11 +74,6 @@ export const registerPods = (
 
                 incoming.view.title = mainPod.pod.title;
 
-                const id = req.params.id;
-                incoming.view = {
-                    id: `${id}`,
-                };
-
                 incoming.podlets = [appBarPod, menuPod, main];
 
                 res.podiumSend(bodyTemplate(appBarPod, menuPod, main));
