@@ -67,19 +67,11 @@ export const registerPods = (
             try {
                 const incoming = res.locals.podium;
 
-                const originalUrl = req.originalUrl;
-
                 const [appBarPod, menuPod, main] = await Promise.all([
                     appBar.fetch(incoming),
                     menu.fetch(incoming),
                     mainPod.resource.fetch(incoming),
                 ]);
-
-                mainPod.resource = layout.client.register({
-                    name: mainPod.pod.name,
-                    uri: originalUrl,
-                    throwable: true,
-                });
 
                 incoming.podlets = [appBarPod, menuPod, main];
 
